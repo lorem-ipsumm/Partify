@@ -1,0 +1,71 @@
+.party-wrapper {
+  width: 80%;
+  height: 100%;
+  padding: 50px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.party-wrapper input {
+  width: 350px;
+  margin-top: 30px;
+}
+
+.info-wrapper {
+  height: 10%;
+}
+
+.info-wrapper .playlist-name {
+  color: #A8EEA8;
+  font-family: "Quicksand", sans-serif;
+  font-size: 30pt;
+  position: relative;
+}
+
+.info-wrapper .playlist-name:after {
+  content: '';
+  width: 100%;
+  height: 3px;
+  transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  background-color: #264849;
+}
+
+.search-wrapper {
+  margin-bottom: 30px;
+  width: 100%;
+  height: 10%;
+}
+
+.search-wrapper input {
+  width: 100%;
+  height: 40px;
+  font-family: "Quicksand", sans-serif;
+  border: none;
+  background-color: transparent;
+  color: #A8EEA8;
+  font-size: 12pt;
+  display: block;
+  position: relative;
+}
+
+.search-wrapper input:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+}
+
+.songs-wrapper {
+  width: 100%;
+  height: 80%;
+  border: 3px solid #264849;
+  border-radius: 5px;
+  overflow-y: auto;
+}
+/*# sourceMappingURL=party.css.map */

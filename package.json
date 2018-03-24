@@ -6,7 +6,11 @@
     "axios": "^0.18.0",
     "query-string": "^6.0.0",
     "react": "^16.2.0",
+    "react-cookie": "^2.1.4",
+    "react-cookies": "^0.1.0",
     "react-dom": "^16.2.0",
+    "react-feather": "^1.0.8",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "spotify": "^0.3.0",
     "spotify-web-api-js": "^0.23.0"

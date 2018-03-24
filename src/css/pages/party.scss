@@ -1,0 +1,71 @@
+@import '../variables';
+
+.party-wrapper{
+    //display: flex;
+    //flex-direction: column;
+    width: 80%;
+    height: 100%;
+    padding: 50px 0px;
+    //text-align: center;
+    input{
+        width: 350px;
+        margin-top: 30px;
+    }
+    display: flex;
+    flex-direction: column;
+}
+.info-wrapper{
+    height: 10%;
+    .playlist-name{
+        color: $main-green;
+        font-family: $quicksand;
+        font-size: 30pt;
+        
+        position: relative;
+        &:after{
+            content: '';
+            width: 100%;
+            height: 3px;
+            transform: translateX(-50%);
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            background-color: #264849;
+        }
+    }
+}
+
+.search-wrapper{
+    margin-bottom: 30px;
+    width: 100%;
+    height: 10%;
+    input{
+        width: 100%;
+        height: 40px;
+        font-family: $quicksand;
+        border: none;
+        background-color: rgba(0,0,0,0);
+        color: $main-green;
+        font-size: 12pt;
+        display: block;
+        position: relative;
+        &:after{
+            content: '';
+            width: 100%;
+            height: 2px;
+            position: absolute;
+            
+            bottom: 0;
+            left: 0;
+            background-color: red;
+        }
+    }
+}
+
+.songs-wrapper{
+    width: 100%;
+    height: 80%;
+    border: 3px solid #264849;
+    border-radius: 5px;
+    overflow-y: auto;
+}
