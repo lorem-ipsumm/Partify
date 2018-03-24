@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
-import Spotify from 'spotify-web-api-js'
-import SpotifyWrapper from 'spotify-wrapper';
-;
+import Spotify from 'spotify-web-api-js';
+
 class App extends Component {
   constructor(){
     super();
