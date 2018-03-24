@@ -7,10 +7,12 @@ class App extends Component {
   constructor(){
     super();
     this.spot = new Spotify();
+    this.site = "http://localhost:3000";
+    //https://trusting-goodall-a08679.netlify.com/callback
 
     if(window.location.toString().includes("access_token")){
-      console.log("logged in");
-      this.spot.setAccessToken("BQCEI5ioGTCqJwgg2GwoM3nzHN9KjmF0Wn2XVn5CKyyRudZGjYHxHaqJtaKs313Ph3fuZFzi-yXywgUXf8TI0ot0cFU2IwLFhkP15DUOqbeC7tmMpVCDv966Hj4NET1KZqOVNRcR69yWJ8V1g2xywBPsxqCCW4NBCHN7c1egM_hg9q4uarHgAOF6KkJ4tvZA7M_NfU3p9UY4GUEpGPDSsQF-z4lV_VEGeCUU");
+      this.access = window.location.toString().substring(window.location.toString().indexOf("=") +1, window.location.toString().indexOf("&"));
+      this.spot.setAccessToken(this.access);
       this.getStuff();
 
     }else{ 
