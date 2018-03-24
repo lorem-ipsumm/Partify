@@ -42,7 +42,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <a href="https://accounts.spotify.com/authorize?client_id=6d01548fd5d7494caebb7e05ff3a9d5a&redirect_uri=http://localhost:3000/callback&scope=user-read-private%20user-read-email&response_type=token&state=123">Login</a>
+        <a href="https://accounts.spotify.com/authorize?client_id=6d01548fd5d7494caebb7e05ff3a9d5a&redirect_uri=https://trusting-goodall-a08679.netlify.com/callback&scope=user-read-private%20user-read-email&response_type=token&state=123">Login</a>
         
       </div>
     );
