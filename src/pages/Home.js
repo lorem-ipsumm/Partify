@@ -11,14 +11,12 @@ class Home extends Component {
     constructor(){
         super();
         this.callback = "http://partify.netlify.com/party";
-        this.url = "https://accounts.spotify.com/authorize?client_id=6d01548fd5d7494caebb7e05ff3a9d5a&" + 
-                    "redirect_uri=" + this.callback + "&" +
-                    "scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-modify-private%20user-library-modify&response_type=token&state=123"; 
-                    
+        this.url = "https://accounts.spotify.com/authorize?client_id=6d01548fd5d7494caebb7e05ff3a9d5a&" +
+            "redirect_uri=" + this.callback + "&" +
+            "scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-modify-private%20user-library-modify&response_type=token&state=123"; 
     }
-
-
     createClicked = () => {
+        
         let playlistName = document.getElementsByClassName("playlist_name")[0];
         cookie.save("playlistName",playlistName.value);
         cookie.save("host",true);
@@ -42,7 +40,7 @@ class Home extends Component {
                 <span className="or">-OR-</span>
                 <div className="input-wrapper">
                     <input className="join_code" placeholder="Party Code"></input>
-                    <a href={this.url}><button onClick={this.joinClicked}><ChevronRight /></button></a>
+                    <NavLink to="/party"><button onClick={this.joinClicked}><ChevronRight /></button></NavLink>
                 </div>
             </div>
         );

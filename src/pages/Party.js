@@ -61,11 +61,11 @@ class Party extends Component {
             
            
             
-        }else if(window.location.toString().includes("access_token") && cookie.load("host") === 'false'){
+        }else if(cookie.load("host") === 'false'){
             //joining
             console.log("joining");
             //this.access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
-            this.spot.setAccessToken();
+            //this.spot.setAccessToken();
             let instance = this;
             var app = firebase.initializeApp({
                 apiKey: "AIzaSyCi07jN0J152HozXKjjwSbLM-ZmzijyAuE",
