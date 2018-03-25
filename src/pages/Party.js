@@ -2,11 +2,22 @@ import React, { Component } from 'react';
 import '../css/pages/party.css';
 import Spotify from 'spotify-web-api-js';
 import cookie from 'react-cookies';
-import { Search } from 'react-feather';
+//import { Search } from 'react-feather';
+import firebase from 'firebase';
+import Result from '../components/Result.js'
+import uuid from 'uuid/v4';
+
 class Party extends Component {
     constructor() {
         super();
         this.spot = new Spotify();
+        this.state = {
+            "playlistName": "",
+            "results": [],
+            "uuid": "",
+            "playlistId": "",
+            "hostId": ""
+        }
         if (window.location.toString().includes("access_token")) {
             let access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
             let instance = this;
@@ -15,19 +26,98 @@ class Party extends Component {
             this.spot.getMe()
                 .then(function (data) {
                     instance.user = data.id;
+                    instance.setState({"hostName": data.display_name});
+                    //console.log(data);
                     cookie.save("user",data.id);
                 }, function (err) {
                     console.log(err);
             });
 
+            var app = firebase.initializeApp({
+                apiKey: "AIzaSyCi07jN0J152HozXKjjwSbLM-ZmzijyAuE",
+                authDomain: "spotify-app-a4781.firebaseapp.com",
+                databaseURL: "https://spotify-app-a4781.firebaseio.com",
+                projectId: "spotify-app-a4781",
+                storageBucket: "",
+                messagingSenderId: "896501726838"
+            });
+
+
+            this.spot.createPlaylist(cookie.load("user"), { "name": cookie.load("playlistName")},function(err,data){
+                if(err)
+                    console.log(err);
+                else
+                    instance.createData(data);
+            });
+            
+            
+           
+            
+        }else{
+            //assume joining
+            //ffed0
+            let instance = this;
+            var app = firebase.initializeApp({
+                apiKey: "AIzaSyCi07jN0J152HozXKjjwSbLM-ZmzijyAuE",
+                authDomain: "spotify-app-a4781.firebaseapp.com",
+                databaseURL: "https://spotify-app-a4781.firebaseio.com",
+                projectId: "spotify-app-a4781",
+                storageBucket: "",
+                messagingSenderId: "896501726838"
+            });
+
+            var ref = firebase.database().ref("/" + cookie.load("uuid"));
+            ref.on("value",function(snapshot){
+                let data = snapshot.val();
+                instance.setState({
+                    "playlistName": data.partyName,
+                    "uuid": data.uuid,
+                    "hostId": data.hostId,
+                    "playlistId": data.playlistId
+                });
+                
+            });
         }
-        this.state = {
-            "playlistName": ""
-        }
+        
+    }
+
+
+    createData = (data) =>{
+        var database = firebase.database();
+        this.setState({
+            "uuid": uuid().toString().substring(0,5),
+            "playlistName": cookie.load("playlistName"),
+            "hostId": cookie.load("user"),
+            "playlistId": data.id,
+            "partyName": data.name
+        });
+
+        firebase.database().ref(this.state.uuid).set({
+            "partyName": data.name,
+            "playlistId": data.id,
+            "partyLink": data.href ,
+            "uuid": this.state.uuid,
+            "hostId": cookie.load("user")
+        });
     }
 
     componentWillMount = () => {
         this.setState({ "playlistName": cookie.load("playlistName")});
+    }
+
+    keyPress = (e) => {
+        if(e.keyCode === 13 ){
+            let instance = this;
+            this.spot.searchTracks(e.target.value)
+                .then(function(data){
+                    var tracks = data.tracks.items;
+                    for(var i = 0; i < tracks.length; i++){
+                        instance.setState({ results: instance.state.results.concat([tracks[i]])});
+                    }
+                }, function(err){
+                    console.log(err);
+                });
+        }
     }
 
     render() {
@@ -35,12 +125,19 @@ class Party extends Component {
             <div className="party-wrapper">
                 <div className="info-wrapper">
                     <span className="playlist-name">{this.state.playlistName}</span>
+                    <br/>
+                    <span className="uuid">Share This Code: {this.state.uuid}</span>
                 </div>
                 <div className="search-wrapper">        
-                    <input placeholder="Search For A Song"></input>
+                    <input className="searchInput" placeholder="Search For A Song" onKeyDown={this.keyPress}></input>
+                    <div className="results-wrapper">
+                        {this.state.results.length !== 0 ? this.state.results.map((item,i)=>
+                        <Result key={i} track={this.state.results[i]} playlistId={this.state.playlistId} hostId={this.state.hostId} spot={this.spot}/>
+                        ): <span>nothing</span>}
+                    </div>
                 </div>
                 <div className="songs-wrapper">
-
+                    
                 </div>
             </div>
         );

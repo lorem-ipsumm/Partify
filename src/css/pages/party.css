@@ -8,11 +8,11 @@
 
 .party-wrapper input {
   width: 350px;
-  margin-top: 30px;
 }
 
 .info-wrapper {
   height: 10%;
+  margin-bottom: 30px;
 }
 
 .info-wrapper .playlist-name {
@@ -33,10 +33,22 @@
   background-color: #264849;
 }
 
+.info-wrapper .uuid {
+  color: #A8EEA8;
+  font-family: "Quicksand", sans-serif;
+  margin-top: 10px;
+  display: block;
+  font-size: 20pt;
+}
+
 .search-wrapper {
   margin-bottom: 30px;
   width: 100%;
-  height: 10%;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-wrapper input {
@@ -64,8 +76,69 @@
 .songs-wrapper {
   width: 100%;
   height: 80%;
-  border: 3px solid #264849;
+  border: 2px solid #264849;
   border-radius: 5px;
   overflow-y: auto;
+  box-shadow: 0px 3px 3px #000;
+}
+
+.results-wrapper {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: auto;
+  max-height: 300px;
+  transform: translateY(50px);
+  overflow-y: auto;
+  background-color: white;
+}
+
+.results-wrapper .result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Quicksand", sans-serif;
+  width: 100%;
+  height: 50px;
+  margin: 10px 0px;
+  padding: 0px 20px;
+  position: relative;
+  transition: all linear 0.1s;
+  cursor: pointer;
+}
+
+.results-wrapper .result .track-name {
+  margin-bottom: 7px;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.results-wrapper .result .track-artist {
+  font-size: 1.3em;
+  color: #383838;
+}
+
+.results-wrapper .result .track-duration {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12pt;
+}
+
+.results-wrapper .result:after {
+  content: '';
+  position: absolute;
+  width: 95%;
+  bottom: -5px;
+  left: 50%;
+  background-color: #e8e8e8;
+  height: 1px;
+  transform: translateX(-50%);
+}
+
+.results-wrapper .result:hover {
+  background-color: #e2e2e2;
 }
 /*# sourceMappingURL=party.css.map */
