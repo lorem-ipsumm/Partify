@@ -33,13 +33,15 @@ class Party extends Component {
                     instance.setState({"hostName": data.display_name});
                     instance.setState({"user": data.id});
                     cookie.save("user",data.id);
-                    instance.spot.createPlaylist(data.id, { "name": cookie.load("playlistName") }, function (err, data) {
+                    instance.spot.createPlaylist(data.id, { "name": cookie.load("playlistName"),"public": false, "collaborative": true }, function (err, data) {
                         console.log(instance.state);
                         if (err)
                             console.log(err);
                         else
                             instance.createData(data);
                     });
+
+
                 }, function (err) {
                     console.log(err);
             });
