@@ -6,7 +6,9 @@ class Track extends Component {
     convertTime = (mills) => {
         let minutes = (mills / 1000) / 60;
         let seconds = (mills / 1000) % 60;
-        return (Math.floor(minutes) + ":" + Math.floor(seconds));
+        if(seconds.toString().length < 2)
+            seconds = Math.floor(seconds) + "0";
+        return (Math.floor(minutes) + ":" + seconds);
     }
 
     resultClicked = () => {
