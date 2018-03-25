@@ -22,6 +22,7 @@ class Party extends Component {
         }
 
         if (window.location.toString().includes("access_token") && cookie.load("host") === 'true') {
+            console.log("creating");
             let access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
             let instance = this;
             this.spot.setAccessToken(access);
@@ -58,6 +59,7 @@ class Party extends Component {
             
         }else if(window.location.toString().includes("access_token") && cookie.load("host") === 'false'){
             //joining
+            console.log("joining");
             let access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
             console.log(access);
             this.spot.setAccessToken(access);
