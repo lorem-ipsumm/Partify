@@ -23,10 +23,10 @@ class Party extends Component {
 
         if (window.location.toString().includes("access_token") && cookie.load("host") === 'true') {
             console.log("creating");
-            let access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
-            console.log(access);
+            this.access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
+            
             let instance = this;
-            this.spot.setAccessToken(access);
+            this.spot.setAccessToken(this.access);
             this.loggedIn = true;
             this.spot.getMe()
                 .then(function (data) {
@@ -64,9 +64,8 @@ class Party extends Component {
         }else if(window.location.toString().includes("access_token") && cookie.load("host") === 'false'){
             //joining
             console.log("joining");
-            let access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
-            console.log(access);
-            this.spot.setAccessToken(access);
+            //this.access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
+            this.spot.setAccessToken();
             let instance = this;
             var app = firebase.initializeApp({
                 apiKey: "AIzaSyCi07jN0J152HozXKjjwSbLM-ZmzijyAuE",
@@ -87,6 +86,7 @@ class Party extends Component {
                         "hostId": data.hostId,
                         "playlistId": data.playlistId
                     });   
+                    instance.spot.setAccessToken(data.partyAccess);
                     instance.getSongs();
                 }else{
                     console.log("null data");
@@ -128,15 +128,16 @@ class Party extends Component {
             "playlistName": cookie.load("playlistName"),
             "hostId": cookie.load("user"),
             "playlistId": data.id,
-            "partyName": data.name
+            "partyName": data.name,
         });
-
+        console.log(this.access);
         firebase.database().ref(this.state.uuid).set({
             "partyName": data.name,
             "playlistId": data.id,
             "partyLink": data.href ,
             "uuid": this.state.uuid,
-            "hostId": cookie.load("user")
+            "hostId": cookie.load("user"),
+            "partyAccess": this.access
         });
     }
 
