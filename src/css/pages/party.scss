@@ -237,4 +237,19 @@
     .song-wrapper{
         height: 90% !important;
     }
+
+    .result{
+        padding: 0px 10px !important;
+        .track-name{
+            font-size: 10pt !important;
+            color: black;
+        }
+        .track-artist{
+            font-size: 9pt !important;
+        }
+
+        .track-duration{
+            right: 10px !important;
+        }
+    }
 }

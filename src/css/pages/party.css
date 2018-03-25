@@ -191,7 +191,7 @@
   background-color: #e2e2e2;
 }
 
-@media (max-width: 350px) {
+@media (max-width: 500px) {
   .party-wrapper {
     width: 90%;
   }
@@ -224,6 +224,19 @@
   }
   .song-wrapper {
     height: 90% !important;
+  }
+  .result {
+    padding: 0px 10px !important;
+  }
+  .result .track-name {
+    font-size: 10pt !important;
+    color: black;
+  }
+  .result .track-artist {
+    font-size: 9pt !important;
+  }
+  .result .track-duration {
+    right: 10px !important;
   }
 }
 /*# sourceMappingURL=party.css.map */
