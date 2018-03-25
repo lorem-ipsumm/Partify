@@ -34,7 +34,7 @@ class Home extends Component {
         return (
             <div className="home-wrapper">
                 <span className="title">Partify</span>
-                <span className="tag">Take control of the party</span>
+                <span className="tag">Queue Up The Party</span>
                 <div className="input-wrapper">
                     <input className="playlist_name" placeholder="New Playlist Name"></input>
                     <a href={this.url}><button onClick={this.createClicked}><ChevronRight/></button></a>

@@ -86,4 +86,13 @@
   border-radius: 5px 0px 0px 5px;
   border: 1px solid white;
 }
+
+@media (max-width: 350px) {
+  .home-wrapper {
+    width: 100% !important;
+  }
+  .input-wrapper {
+    width: 80% !important;
+  }
+}
 /*# sourceMappingURL=home.css.map */

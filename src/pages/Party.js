@@ -103,12 +103,13 @@ class Party extends Component {
             if (err){
                 console.log(err);
             }else{
-                for(let i = 0; i < data.items.length; i++){
-                    instance.setState({
-                        tracks: instance.state.tracks.concat(data.items[i].track),
-                    });
-                }
-                console.log(instance.state);
+               instance.setState({
+                   tracks: []
+               });
+
+                instance.setState({
+                    tracks: data.items
+                });
             }
         });
     }
@@ -154,13 +155,9 @@ class Party extends Component {
 
     resultClicked = () => {
         document.getElementsByClassName("searchInput")[0].value = "";
+        this.getSongs();
         this.setState({results: []});
-        var ref = firebase.database().ref("/" + cookie.load("uuid"));
-        let instance = this;
-        ref.on("value", function (snapshot) {
-            //instance.setState({tracks: []});
-            //this.setState({tracks: this.state.tracks.concat(snapshot.val())});
-        });
+        
     }
 
     render() {

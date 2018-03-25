@@ -26,12 +26,12 @@ class Track extends Component {
     }
 
     componentWillMount() {
-        var track = this.props.track;
-        //console.log(track);
+        var track = this.props.track.track;
         this.trackName = track.name;
         this.trackArtist = track.artists[0].name;
         this.trackDuration = track.duration_ms;
         this.uri = track.uri;
+        
     }
 
     render() {

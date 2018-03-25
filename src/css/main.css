@@ -6,4 +6,16 @@
   align-items: center;
   justify-content: center;
 }
+
+.main-wrapper .buttons {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  left: 0;
+  text-align: center;
+}
+
+.main-wrapper .buttons a {
+  color: white;
+}
 /*# sourceMappingURL=main.css.map */

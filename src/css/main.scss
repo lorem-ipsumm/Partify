@@ -6,4 +6,15 @@
     align-items: center;
     justify-content: center;
     
+
+    .buttons{
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        a{
+            color: white;
+        }
+    }
 }

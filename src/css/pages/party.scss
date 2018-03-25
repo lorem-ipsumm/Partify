@@ -14,6 +14,10 @@
     display: flex;
     flex-direction: column;
 }
+
+
+
+
 .info-wrapper{
     height: 10%;
     margin-bottom: 30px;
@@ -188,5 +192,49 @@
         &:hover{
             background-color: #e2e2e2;
         }
+    }
+}
+
+
+@media(max-width: 350px){
+    .party-wrapper{
+        width: 90%;
+    }
+
+    .playlist-name{
+        font-size: 20pt !important;
+    }
+    
+    .uuid{
+        font-size: 15pt !important;
+    }
+
+    .track-name{
+        width: 90% !important;
+        margin-bottom: 2px !important;
+        font-weight: bold;
+        font-size: 7pt !important;
+        color: #fff;
+    }
+
+    .track-artist{
+        font-size: 7pt !important;
+        color: #383838;
+    }
+
+    .track-duration{
+        position: absolute;
+        right: 5px !important;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 10pt !important;
+    }
+
+    .track{
+        padding: 0px 5px !important;
+    }
+
+    .song-wrapper{
+        height: 90% !important;
     }
 }
