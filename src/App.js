@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="main-wrapper">
         <Route exact path="/" component={Home} />
-        <Route path="/party" component={Party} />
+        <Route exact path="/party" component={Party} />
       </div>
     );
   }

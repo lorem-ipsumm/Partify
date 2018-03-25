@@ -13,7 +13,7 @@ class Home extends Component {
         this.callback = "http://localhost:3000/party";
         this.url = "https://accounts.spotify.com/authorize?client_id=6d01548fd5d7494caebb7e05ff3a9d5a&" + 
                     "redirect_uri=" + this.callback + "&" +
-                    "scope=user-read-private%20user-read-email%20playlist-modify-public%20user-library-modify&response_type=token&state=123"; 
+                    "scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-modify-private%20user-library-modify&response_type=token&state=123"; 
                     
     }
 
