@@ -24,6 +24,7 @@ class Party extends Component {
         if (window.location.toString().includes("access_token") && cookie.load("host") === 'true') {
             console.log("creating");
             let access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
+            console.log(access);
             let instance = this;
             this.spot.setAccessToken(access);
             this.loggedIn = true;
@@ -95,6 +96,8 @@ class Party extends Component {
             
 
             
+        }else{
+            console.log("how is this possible");
         }
         /*cookies.erase("host");
         cookies.erase("uuid");
