@@ -4,11 +4,15 @@ import '../css/pages/party.css';
 
 class Track extends Component {
     convertTime = (mills) => {
-        let minutes = (mills / 1000) / 60;
-        let seconds = (mills / 1000) % 60;
+        var minutes = Math.floor((mills / 1000) / 60);
+        var seconds = Math.floor((mills / 1000) % 60);
+        
         if(seconds.toString().length < 2)
-            seconds = Math.floor(seconds) + "0";
-        return (Math.floor(minutes) + ":" + seconds);
+            seconds = "0" + seconds.toString();
+
+        
+        
+        return (minutes + ":" + seconds);
     }
 
     resultClicked = () => {

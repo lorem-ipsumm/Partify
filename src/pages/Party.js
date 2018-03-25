@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/pages/party.css';
 import Spotify from 'spotify-web-api-js';
 import cookie from 'react-cookies';
-//import { Search } from 'react-feather';
+import { Search } from 'react-feather';
 import firebase from 'firebase';
 import Result from '../components/Result.js'
 import Track from '../components/Track.js'
@@ -35,7 +35,7 @@ class Party extends Component {
                     instance.setState({"user": data.id});
                     cookie.save("user",data.id);
                     instance.spot.createPlaylist(data.id, { "name": cookie.load("playlistName"),"public": false, "collaborative": true }, function (err, data) {
-                        console.log(instance.state);
+                        //console.log(instance.state);
                         if (err)
                             console.log(err);
                         else
@@ -78,6 +78,7 @@ class Party extends Component {
 
             var ref = firebase.database().ref("/" + cookie.load("uuid"));
             ref.on("value",function(snapshot){
+                console.log("here");
                 let data = snapshot.val();
                 if(data !== null){
                     instance.setState({
@@ -92,16 +93,7 @@ class Party extends Component {
                     console.log("null data");
                 }
             });
-
-            
-
-            
-        }else{
-            console.log("how is this possible");
         }
-        /*cookies.erase("host");
-        cookies.erase("uuid");
-        cookies.erase("playlistName");*/
     }
 
 
@@ -130,7 +122,6 @@ class Party extends Component {
             "playlistId": data.id,
             "partyName": data.name,
         });
-        console.log(this.access);
         firebase.database().ref(this.state.uuid).set({
             "partyName": data.name,
             "playlistId": data.id,
@@ -146,18 +137,30 @@ class Party extends Component {
     }
 
     keyPress = (e) => {
-        if(e.keyCode === 13 ){
-            let instance = this;
+        let instance = this;
+        if(e.target.value.length > 0){
             this.spot.searchTracks(e.target.value)
                 .then(function(data){
                     var tracks = data.tracks.items;
-                    for(var i = 0; i < tracks.length; i++){
-                        instance.setState({ results: instance.state.results.concat([tracks[i]])});
-                    }
+                    instance.setState({ results: [] });
+                    instance.setState({ results: tracks });
                 }, function(err){
                     console.log(err);
                 });
+        }else{
+            instance.setState({results: []});
         }
+    }
+
+    resultClicked = () => {
+        document.getElementsByClassName("searchInput")[0].value = "";
+        this.setState({results: []});
+        var ref = firebase.database().ref("/" + cookie.load("uuid"));
+        let instance = this;
+        ref.on("value", function (snapshot) {
+            //instance.setState({tracks: []});
+            //this.setState({tracks: this.state.tracks.concat(snapshot.val())});
+        });
     }
 
     render() {
@@ -168,17 +171,18 @@ class Party extends Component {
                     <span className="uuid">Share This Code: {this.state.uuid}</span>
                 </div>
                 <div className="search-wrapper">        
-                    <input className="searchInput" placeholder="Search For A Song" onKeyDown={this.keyPress}></input>
-                    <div className="results-wrapper">
+                    <input className="searchInput" placeholder="Search For A Song" onKeyUp={this.keyPress}></input>
+                    <Search/>
+                    <div className="results-wrapper" onClick={this.resultClicked}>
                         {this.state.results.length !== 0 ? this.state.results.map((item,i)=>
                         <Result key={i} track={this.state.results[i]} playlistId={this.state.playlistId} hostId={this.state.hostId} spot={this.spot}/>
-                        ): <span>nothing</span>}
+                        ): <span></span>}
                     </div>
                 </div>
                 <div className="songs-wrapper">
                     {this.state.tracks.length !== 0 ? this.state.tracks.map((item, i) =>
                         <Track key={i} track={this.state.tracks[i]} />
-                    ) : <span>nothing</span>}
+                    ) : <span></span>}
                 </div>
             </div>
         );

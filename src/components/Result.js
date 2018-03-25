@@ -4,9 +4,15 @@ import '../css/pages/party.css';
 
 class Result extends Component {
     convertTime = (mills) => {
-        let minutes = (mills/1000) / 60;
-        let seconds = (mills/1000) % 60;
-        return(Math.floor(minutes)+":"+Math.floor(seconds));
+        var minutes = Math.floor((mills / 1000) / 60);
+        var seconds = Math.floor((mills / 1000) % 60);
+
+        if (seconds.toString().length < 2)
+            seconds = "0" + seconds.toString();
+
+
+
+        return (minutes + ":" + seconds);
     }
 
     resultClicked = () => {
@@ -16,7 +22,6 @@ class Result extends Component {
             else    
                 console.log(data);
         });
-        
     }
 
     componentWillMount(){
