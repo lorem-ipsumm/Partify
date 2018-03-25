@@ -94,7 +94,7 @@
         cursor: pointer;
         
         .track-name{
-            margin-bottom: 2px;
+            margin-bottom: 0px;
             font-weight: bold;
             font-size: 1.3em;
             color: #fff;
@@ -132,6 +132,7 @@
     //background-color: red;
     overflow-y: auto;
     background-color: white;
+    z-index: 2;
     
     .result{
         display: flex;
@@ -139,7 +140,7 @@
         justify-content: center;
         font-family: $quicksand;
         width: 100%;
-        height: 50px;
+        height: 55px;
         margin: 10px 0px;
         padding: 0px 20px;
         position: relative;

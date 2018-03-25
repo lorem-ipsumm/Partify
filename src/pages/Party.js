@@ -31,8 +31,15 @@ class Party extends Component {
                 .then(function (data) {
                     instance.user = data.id;
                     instance.setState({"hostName": data.display_name});
-                    //console.log(data);
+                    instance.setState({"user": data.id});
                     cookie.save("user",data.id);
+                    instance.spot.createPlaylist(data.id, { "name": cookie.load("playlistName") }, function (err, data) {
+                        console.log(instance.state);
+                        if (err)
+                            console.log(err);
+                        else
+                            instance.createData(data);
+                    });
                 }, function (err) {
                     console.log(err);
             });
@@ -46,13 +53,7 @@ class Party extends Component {
                 messagingSenderId: "896501726838"
             });
 
-
-            this.spot.createPlaylist(cookie.load("user"), { "name": cookie.load("playlistName")},function(err,data){
-                if(err)
-                    console.log(err);
-                else
-                    instance.createData(data);
-            });
+            
             
             
            
@@ -76,20 +77,26 @@ class Party extends Component {
             var ref = firebase.database().ref("/" + cookie.load("uuid"));
             ref.on("value",function(snapshot){
                 let data = snapshot.val();
-                instance.setState({
-                    "playlistName": data.partyName,
-                    "uuid": data.uuid,
-                    "hostId": data.hostId,
-                    "playlistId": data.playlistId
-                });   
-                instance.getSongs();
+                if(data !== null){
+                    instance.setState({
+                        "playlistName": data.partyName,
+                        "uuid": data.uuid,
+                        "hostId": data.hostId,
+                        "playlistId": data.playlistId
+                    });   
+                    instance.getSongs();
+                }else{
+                    console.log("null data");
+                }
             });
 
             
 
             
         }
-        
+        /*cookies.erase("host");
+        cookies.erase("uuid");
+        cookies.erase("playlistName");*/
     }
 
 

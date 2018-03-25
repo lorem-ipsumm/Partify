@@ -32,7 +32,6 @@ class Result extends Component {
         return (
             <div className="result" onClick={this.resultClicked}>
               <span className="track-name">{this.trackName}</span>
-              <br/>
               <span className="track-artist">{this.trackArtist}</span>
               <span className="track-duration">{this.convertTime(this.trackDuration)}</span>
             </div>

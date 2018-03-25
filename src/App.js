@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <div className="main-wrapper">
-        <Route exact path="/" render={()=><Home/>}/>
+        <Route exact path="/" component={Home} />
         <Route path="/party" component={Party} />
       </div>
     );
