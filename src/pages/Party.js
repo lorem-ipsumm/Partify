@@ -5,6 +5,7 @@ import cookie from 'react-cookies';
 //import { Search } from 'react-feather';
 import firebase from 'firebase';
 import Result from '../components/Result.js'
+import Track from '../components/Track.js'
 import uuid from 'uuid/v4';
 
 class Party extends Component {
@@ -16,9 +17,11 @@ class Party extends Component {
             "results": [],
             "uuid": "",
             "playlistId": "",
-            "hostId": ""
+            "hostId": "",
+            "tracks": []
         }
-        if (window.location.toString().includes("access_token")) {
+
+        if (window.location.toString().includes("access_token") && cookie.load("host") === 'true') {
             let access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
             let instance = this;
             this.spot.setAccessToken(access);
@@ -53,9 +56,11 @@ class Party extends Component {
             
            
             
-        }else{
-            //assume joining
-            //ffed0
+        }else if(window.location.toString().includes("access_token") && cookie.load("host") === 'false'){
+            //joining
+            let access = window.location.toString().substring(window.location.toString().indexOf("=") + 1, window.location.toString().indexOf("&"));
+            console.log(access);
+            this.spot.setAccessToken(access);
             let instance = this;
             var app = firebase.initializeApp({
                 apiKey: "AIzaSyCi07jN0J152HozXKjjwSbLM-ZmzijyAuE",
@@ -74,13 +79,33 @@ class Party extends Component {
                     "uuid": data.uuid,
                     "hostId": data.hostId,
                     "playlistId": data.playlistId
-                });
-                
+                });   
+                instance.getSongs();
             });
+
+            
+
+            
         }
         
     }
 
+
+    getSongs = () => {
+        let instance = this;
+        this.spot.getPlaylistTracks(this.state.hostId, this.state.playlistId, {}, function (err, data) {
+            if (err){
+                console.log(err);
+            }else{
+                for(let i = 0; i < data.items.length; i++){
+                    instance.setState({
+                        tracks: instance.state.tracks.concat(data.items[i].track),
+                    });
+                }
+                console.log(instance.state);
+            }
+        });
+    }
 
     createData = (data) =>{
         var database = firebase.database();
@@ -125,7 +150,6 @@ class Party extends Component {
             <div className="party-wrapper">
                 <div className="info-wrapper">
                     <span className="playlist-name">{this.state.playlistName}</span>
-                    <br/>
                     <span className="uuid">Share This Code: {this.state.uuid}</span>
                 </div>
                 <div className="search-wrapper">        
@@ -137,7 +161,9 @@ class Party extends Component {
                     </div>
                 </div>
                 <div className="songs-wrapper">
-                    
+                    {this.state.tracks.length !== 0 ? this.state.tracks.map((item, i) =>
+                        <Track key={i} track={this.state.tracks[i]} />
+                    ) : <span>nothing</span>}
                 </div>
             </div>
         );
