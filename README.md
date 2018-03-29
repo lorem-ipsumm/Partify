@@ -14,6 +14,6 @@ When a host, that has spotify premium, creates a new "party", they can then shar
 
 Since Spotify doesn't allow people to add to playlists that they don't own through the use of their API, we had to come up with a workaround 
 
-##What's next
+## What's next
 
 Unfortunately, this is against Spotify's Terms of Services, so this isn't a project that can be expanded on too much, but even so, being able to present this to Spotify would be our next step. According to our research there is a big desire for this kind of functionality. If a blatant workaround is popular enough, Spotify may consider adding this functionality .
